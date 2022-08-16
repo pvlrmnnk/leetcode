@@ -1,6 +1,7 @@
 package p0001
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,29 +19,20 @@ func TestTwoSumSolution(t *testing.T) {
 	for _, solution := range solutions {
 		t.Run(solution.name, func(t *testing.T) {
 			tcs := []struct {
-				name   string
 				nums   []int
 				target int
-				idxs   []int
+				r      []int
 			}{
-				{
-					"No solution",
-					[]int{1, 2, 3, 4},
-					100,
-					nil,
-				},
-				{
-					"Leet testcase 1",
-					[]int{2, 7, 11, 15},
-					9,
-					[]int{0, 1},
-				},
+				{[]int{1, 2, 3, 4}, 100, nil}, // No solution
+				{[]int{2, 7, 11, 15}, 9, []int{0, 1}},
+				{[]int{3, 2, 4}, 6, []int{1, 2}},
+				{[]int{3, 3}, 6, []int{0, 1}},
 			}
 
 			for _, tc := range tcs {
-				t.Run(tc.name, func(t *testing.T) {
+				t.Run(fmt.Sprintf("%v %d", tc.nums, tc.target), func(t *testing.T) {
 					r := solution.fn(tc.nums, tc.target)
-					assert.ElementsMatch(t, tc.idxs, r)
+					assert.ElementsMatch(t, tc.r, r)
 				})
 			}
 		})
