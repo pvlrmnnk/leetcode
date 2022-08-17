@@ -4,3 +4,5 @@
 - [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/)
     - [String-based solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0009/solution.go#L7)
     - [Division-based solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0009/solution.go#L21)
+- [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
+    - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0013/solution.go#L5)
