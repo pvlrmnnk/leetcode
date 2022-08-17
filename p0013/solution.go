@@ -32,3 +32,32 @@ func Solution() RomanToIntSolution {
 		return acc
 	}
 }
+
+func ReversedOrderSolution() RomanToIntSolution {
+	return func(s string) int {
+		m := map[rune]int{
+			'I': 1,
+			'V': 5,
+			'X': 10,
+			'L': 50,
+			'C': 100,
+			'D': 500,
+			'M': 1000,
+		}
+
+		var acc int
+		var c, l rune
+
+		for i := len(s) - 1; i >= 0; i-- {
+			c = rune(s[i])
+			if m[c] < m[l] {
+				acc -= m[c]
+			} else {
+				acc += m[c]
+			}
+			l = c
+		}
+
+		return acc
+	}
+}

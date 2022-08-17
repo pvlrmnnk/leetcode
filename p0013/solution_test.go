@@ -13,6 +13,7 @@ func TestRomanToIntSolution(t *testing.T) {
 		fn   RomanToIntSolution
 	}{
 		{"Solution", Solution()},
+		{"ReversedOrderSolution", ReversedOrderSolution()},
 	}
 
 	for _, solution := range solutions {
