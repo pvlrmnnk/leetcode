@@ -9,6 +9,8 @@
     - [Reeverse order solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0013/solution.go#L36)
 - [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0021/solution.go#L10)
+- [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+    - [Map-based solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0142/solution.go#L10)
 - [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0205/solution.go#L7)
 - [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
