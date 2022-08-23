@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMergeTwoSortedListsSolution(t *testing.T) {
+func TestReverseLinkedListSolution(t *testing.T) {
 	ss := []ReverseLinkedListSolution{
 		IterativeSolution(),
 		RecursiveSolution(),

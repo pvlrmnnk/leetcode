@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRunningSumOf1dArraySolution(t *testing.T) {
+func TestIsSubsequenceSolution(t *testing.T) {
 	ss := []IsSubsequenceSolution{
 		Solution(),
 	}

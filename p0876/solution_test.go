@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMergeTwoSortedListsSolution(t *testing.T) {
+func TestMiddleOfTheLinkedListSolution(t *testing.T) {
 	ss := []MiddleOfTheLinkedListSolution{
 		Solution(),
 	}

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMergeTwoSortedListsSolution(t *testing.T) {
+func TestLinkedListCycleSolution(t *testing.T) {
 	ss := []LinkedListCycleSolution{
 		MapSolution(),
 	}

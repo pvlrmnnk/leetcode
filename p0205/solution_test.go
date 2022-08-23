@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRunningSumOf1dArraySolution(t *testing.T) {
+func TestIsomorphicStringsSolution(t *testing.T) {
 	ss := []IsomorphicStringsSolution{
 		Solution(),
 	}
