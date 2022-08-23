@@ -20,5 +20,7 @@
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0392/solution.go#L5)
 - [724. Find Pivot Index](https://leetcode.com/problems/find-pivot-index/) (duplicate [1991. Find the Middle Index in Array](https://leetcode.com/problems/find-the-middle-index-in-array/))
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0724/solution.go#L5)
+- [876. Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/)
+    - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0876/solution.go#L10)
 - [1480. Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/)
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p1480/solution.go#L5)
