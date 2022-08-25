@@ -19,6 +19,8 @@
 - [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
     - [Iterative solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0206/solution.go#L10)
     - [Recursive solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0206/solution.go#L25)
+- [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+    - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0278/solution.go#L5)
 - [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/)
     - [Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0409/solution.go#L5)
     - [Greedy Solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0409/solution.go#L24)
