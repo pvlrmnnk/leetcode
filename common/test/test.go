@@ -3,7 +3,7 @@ package test
 import "fmt"
 
 func N(s string, n int) string {
-	return fmt.Sprintf("%s #%d", s, n+1)
+	return fmt.Sprintf("%s[%d]", s, n)
 }
 
 func Solution(n int) string {
