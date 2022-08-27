@@ -22,19 +22,24 @@ func TestBinaryTreeLevelOrderTraversalSolution(t *testing.T) {
 				values [][]int
 			}{
 				{
-					"",
+					"empty tree",
 					nil,
 					nil,
 				},
 				{
-					"",
+					"single node tree",
 					&TreeNode{1, nil, nil},
 					[][]int{{1}},
 				},
 				{
-					"",
+					"tree case 1",
 					&TreeNode{3, &TreeNode{9, nil, nil}, &TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}},
 					[][]int{{3}, {9, 20}, {15, 7}},
+				},
+				{
+					"tree case 2",
+					&TreeNode{1, &TreeNode{2, &TreeNode{4, nil, nil}, nil}, &TreeNode{3, nil, &TreeNode{5, nil, nil}}},
+					[][]int{{1}, {2, 3}, {4, 5}},
 				},
 			}
 

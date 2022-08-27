@@ -1,8 +1,6 @@
 package p0102
 
-import (
-	"github.com/emirpasic/gods/queues/linkedlistqueue"
-)
+import "container/list"
 
 type TreeNode struct {
 	Val   int
@@ -12,30 +10,45 @@ type TreeNode struct {
 
 type BinaryTreeLevelOrderTraversalSolution func(root *TreeNode) [][]int
 
+type Wrapper struct {
+	node  *TreeNode
+	level int
+}
+
 func Solution(root *TreeNode) [][]int {
-	var values [][]int
-	queue := linkedlistqueue.New()
+	if root == nil {
+		return nil
+	}
+
+	levelMap := make(map[int][]int)
+	queue := list.New()
 
 	if root != nil {
-		queue.Enqueue(&TreeNode{
-			0, root, nil,
+		queue.PushBack(&Wrapper{
+			root, 0,
 		})
 	}
 
-	for !queue.Empty() {
-		node, _ := queue.Dequeue()
-		var levelValues []int
-		if left := node.(*TreeNode).Left; left != nil {
-			levelValues = append(levelValues, left.Val)
-			queue.Enqueue(left)
+	for queue.Len() != 0 {
+		wrapper := queue.Remove(queue.Front()).(*Wrapper)
+		node := wrapper.node
+		level := wrapper.level
+		levelMap[level] = append(levelMap[level], node.Val)
+		if left := node.Left; left != nil {
+			queue.PushBack(&Wrapper{
+				left, level + 1,
+			})
 		}
-		if right := node.(*TreeNode).Right; right != nil {
-			levelValues = append(levelValues, right.Val)
-			queue.Enqueue(right)
+		if right := node.Right; right != nil {
+			queue.PushBack(&Wrapper{
+				right, level + 1,
+			})
 		}
-		if len(levelValues) > 0 {
-			values = append(values, levelValues)
-		}
+	}
+
+	values := make([][]int, len(levelMap))
+	for k, v := range levelMap {
+		values[k] = v
 	}
 
 	return values
