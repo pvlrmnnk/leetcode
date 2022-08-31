@@ -1,0 +1,7 @@
+{
+    "solution_no": "0",
+    "solution_package": "p{{ cookiecutter.solution_no.rjust(4, '0') }}",
+    "solution_name": "Problem",
+    "solution_fn_type": "{{ cookiecutter.solution_name | replace(' ', '') }}Solution",
+    "solution_fn_signature": "()"
+}

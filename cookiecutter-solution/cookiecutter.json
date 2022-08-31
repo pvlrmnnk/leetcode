@@ -1,6 +1,0 @@
-{
-    "solution_num": "0",
-    "solution_package": "p{{ cookiecutter.solution_num.rjust(4, '0') }}",
-    "solution_fn_type": "{{ cookiecutter.solution_package | upper }}Solution",
-    "solution_fn_signature": "()"
-}
