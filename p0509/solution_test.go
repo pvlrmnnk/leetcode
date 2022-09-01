@@ -7,7 +7,9 @@ import (
 )
 
 func TestFibonacciNumberSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   FibonacciNumberSolution
 	}{
@@ -15,30 +17,43 @@ func TestFibonacciNumberSolution(t *testing.T) {
 		{"iterative solution", IterativeSolution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				n int
+			}
+			tcs := []struct {
 				name string
-				n, r int
+				args args
+				want int
 			}{
 				{
 					"",
-					2, 1,
+					args{2},
+					1,
 				},
 				{
 					"",
-					3, 2,
+					args{3},
+					2,
 				},
 				{
 					"",
-					4, 3,
+					args{4},
+					3,
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					r := solution.fn(testCase.n)
-					assert.Equal(t, testCase.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.n)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
