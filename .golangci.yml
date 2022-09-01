@@ -2,13 +2,11 @@ run:
   skip-dirs:
     - tpl
     - common
-    - p1025
-    - p0142
     - p0205
     - p0206
     - p0278
-    - p0338 #
-    - p0392
+    - p0338
+    - p0392 #
     - p0409
     - p0509
     - p0589
@@ -16,7 +14,7 @@ run:
     - p0724
     - p0746
     - p0876
-    - p1225
+    - p1025
     - p1137
     - p1480
     - p1646
@@ -60,3 +58,4 @@ issues:
     - path: _test\.go
       linters:
         - varnamelen
+        - funlen

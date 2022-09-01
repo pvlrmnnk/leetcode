@@ -3,42 +3,87 @@ package p0142
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLinkedListCycleSolution(t *testing.T) {
-	ss := []LinkedListCycleSolution{
-		MapSolution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   LinkedListCycleSolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				head *ListNode
+			}
 			tcs := []struct {
-				head, r *ListNode
+				name string
+				args args
+				want *ListNode
 			}{
-				func() struct{ head, r *ListNode } {
+				func() struct {
+					name string
+					args args
+					want *ListNode
+				} {
 					head := &ListNode{3, &ListNode{2, &ListNode{0, &ListNode{-4, nil}}}}
 					head.Next.Next.Next.Next = head.Next
-					return struct{ head, r *ListNode }{head, head.Next}
+
+					return struct {
+						name string
+						args args
+						want *ListNode
+					}{
+						"",
+						args{head},
+						head.Next,
+					}
 				}(),
-				func() struct{ head, r *ListNode } {
+				func() struct {
+					name string
+					args args
+					want *ListNode
+				} {
 					head := &ListNode{1, &ListNode{2, nil}}
 					head.Next.Next = head
-					return struct{ head, r *ListNode }{head, head}
+
+					return struct {
+						name string
+						args args
+						want *ListNode
+					}{
+						"",
+						args{head},
+						head,
+					}
 				}(),
 				{
-					&ListNode{1, nil}, nil,
+					"",
+					args{&ListNode{1, nil}},
+					nil,
 				},
 				{
-					nil, nil,
+					"",
+					args{nil},
+					nil,
 				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.head)
-					assert.Equal(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.head)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})

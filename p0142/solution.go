@@ -7,18 +7,16 @@ type ListNode struct {
 
 type LinkedListCycleSolution func(head *ListNode) *ListNode
 
-func MapSolution() LinkedListCycleSolution {
-	return func(head *ListNode) *ListNode {
-		m := make(map[*ListNode]struct{})
+func Solution(head *ListNode) *ListNode {
+	visited := make(map[*ListNode]struct{})
 
-		for head != nil {
-			if _, ok := m[head]; ok {
-				return head
-			}
-			m[head] = struct{}{}
-			head = head.Next
+	for head != nil {
+		if _, ok := visited[head]; ok {
+			return head
 		}
-
-		return nil
+		visited[head] = struct{}{}
+		head = head.Next
 	}
+
+	return nil
 }
