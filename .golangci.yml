@@ -1,0 +1,61 @@
+run:
+  skip-dirs:
+    - tpl
+    - common
+    - p0013
+    - p0021
+    - p0070
+    - p0102
+    - p0118
+    - p0119
+    - p0121
+    - p1025
+    - p0142
+    - p0205
+    - p0206
+    - p0278
+    - p0338
+    - p0392
+    - p0409
+    - p0509
+    - p0589
+    - p0704
+    - p0724
+    - p0746
+    - p0876
+    - p1225
+    - p1137
+    - p1480
+    - p1646
+
+linters:
+  enable-all: true
+  disable:
+    # deprecated
+    - exhaustivestruct
+    - golint
+    - ifshort
+    - scopelint
+    - maligned
+    - interfacer
+    - deadcode
+    - structcheck
+    - nosnakecase
+    - varcheck
+
+    # 1.18+
+    # https://github.com/golangci/golangci-lint/issues/2649
+    - rowserrcheck
+    - sqlclosecheck
+    - structcheck
+    - wastedassign
+
+    # useless
+    - gomnd # magic numbers are ok
+    - testpackage # no need for separate test package
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - varnamelen
