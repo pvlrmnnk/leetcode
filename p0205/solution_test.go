@@ -3,30 +3,56 @@ package p0205
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIsomorphicStringsSolution(t *testing.T) {
-	ss := []IsomorphicStringsSolution{
-		Solution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   IsomorphicStringsSolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				string1, string2 string
+			}
 			tcs := []struct {
-				s, t string
-				r    bool
+				name string
+				args args
+				want bool
 			}{
-				{"egg", "add", true},
-				{"foo", "bar", false},
-				{"paper", "title", true},
+				{
+					"",
+					args{"egg", "add"},
+					true,
+				},
+				{
+					"",
+					args{"foo", "bar"},
+					false,
+				},
+				{
+					"",
+					args{"paper", "title"},
+					true,
+				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.s, tc.t)
-					assert.Equal(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.string1, tc.args.string2)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})

@@ -2,30 +2,29 @@ package p0205
 
 import "strings"
 
-type IsomorphicStringsSolution func(s string, t string) bool
+type IsomorphicStringsSolution func(string1, string2 string) bool
 
-func Solution() IsomorphicStringsSolution {
-	return func(s, t string) bool {
-		transform := func(s string) string {
-			var ms strings.Builder
-			m := make(map[rune]rune)
-			i := 0
+func Solution(string1, string2 string) bool {
+	//nolint:varnamelen
+	transform := func(s string) string {
+		var b strings.Builder
+		dic := make(map[rune]rune)
 
-			for _, r := range s {
-				var nr rune
-				if _, ok := m[r]; !ok {
-					nr = rune(i)
-					i++
-					m[r] = nr
-				} else {
-					nr = m[r]
-				}
-				ms.WriteRune(nr)
+		i := 0
+		for _, r := range s {
+			var nr rune
+			if _, ok := dic[r]; !ok {
+				nr = rune(i)
+				i++
+				dic[r] = nr
+			} else {
+				nr = dic[r]
 			}
-
-			return ms.String()
+			b.WriteRune(nr)
 		}
 
-		return transform(s) == transform(t)
+		return b.String()
 	}
+
+	return transform(string1) == transform(string2)
 }
