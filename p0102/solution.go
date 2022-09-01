@@ -30,7 +30,7 @@ func Solution(root *TreeNode) [][]int {
 	}
 
 	for queue.Len() != 0 {
-		wrapper := queue.Remove(queue.Front()).(*Wrapper)
+		wrapper, _ := queue.Remove(queue.Front()).(*Wrapper)
 		node := wrapper.node
 		level := wrapper.level
 		levelMap[level] = append(levelMap[level], node.Val)

@@ -7,46 +7,57 @@ import (
 )
 
 func TestBinaryTreeLevelOrderTraversalSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   BinaryTreeLevelOrderTraversalSolution
 	}{
 		{"solution", Solution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
-				name   string
-				root   *TreeNode
-				values [][]int
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				root *TreeNode
+			}
+			tcs := []struct {
+				name string
+				args args
+				want [][]int
 			}{
 				{
 					"empty tree",
-					nil,
+					args{nil},
 					nil,
 				},
 				{
 					"single node tree",
-					&TreeNode{1, nil, nil},
+					args{&TreeNode{1, nil, nil}},
 					[][]int{{1}},
 				},
 				{
 					"tree case 1",
-					&TreeNode{3, &TreeNode{9, nil, nil}, &TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}},
+					args{&TreeNode{3, &TreeNode{9, nil, nil}, &TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}}},
 					[][]int{{3}, {9, 20}, {15, 7}},
 				},
 				{
 					"tree case 2",
-					&TreeNode{1, &TreeNode{2, &TreeNode{4, nil, nil}, nil}, &TreeNode{3, nil, &TreeNode{5, nil, nil}}},
+					args{&TreeNode{1, &TreeNode{2, &TreeNode{4, nil, nil}, nil}, &TreeNode{3, nil, &TreeNode{5, nil, nil}}}},
 					[][]int{{1}, {2, 3}, {4, 5}},
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					values := solution.fn(testCase.root)
-					assert.EqualValues(t, testCase.values, values)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.root)
+					assert.EqualValues(t, tc.want, got)
 				})
 			}
 		})
