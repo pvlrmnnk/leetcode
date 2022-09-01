@@ -2,7 +2,6 @@ run:
   skip-dirs:
     - tpl
     - common
-    - p0121
     - p1025
     - p0142
     - p0205
