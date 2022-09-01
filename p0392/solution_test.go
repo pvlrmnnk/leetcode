@@ -3,29 +3,51 @@ package p0392
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIsSubsequenceSolution(t *testing.T) {
-	ss := []IsSubsequenceSolution{
-		Solution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   IsSubsequenceSolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
-			tcs := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				s, t string
-				r    bool
+			}
+			tcs := []struct {
+				name string
+				args args
+				want bool
 			}{
-				{"abc", "ahbgdc", true},
-				{"axc", "ahbgdc", false},
+				{
+					"",
+					args{"abc", "ahbgdc"},
+					true,
+				},
+				{
+					"",
+					args{"axc", "ahbgdc"},
+					false,
+				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.s, tc.t)
-					assert.Equal(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.s, tc.args.t)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
