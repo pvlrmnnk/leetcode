@@ -1,37 +1,64 @@
 package p0009
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPalindromeNumberSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   PalindromeNumberSolution
 	}{
-		{"ToStringSolution", ToStringSolution()},
-		{"DivisionSolution", DivisionSolution()},
+		{"string solution", ToStringSolution},
+		{"division solution", DivisionSolution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			tcs := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				x int
-				r bool
+			}
+			tcs := []struct {
+				name string
+				args args
+				want bool
 			}{
-				{121, true},
-				{-121, false},
-				{10, false},
-				{1, true},
+				{
+					"",
+					args{121},
+					true,
+				},
+				{
+					"",
+					args{-121},
+					false,
+				},
+				{
+					"",
+					args{10},
+					false,
+				},
+				{
+					"",
+					args{1},
+					true,
+				},
 			}
 
 			for _, tc := range tcs {
-				t.Run(fmt.Sprintf("%d", tc.x), func(t *testing.T) {
-					r := solution.fn(tc.x)
-					assert.Equal(t, tc.r, r)
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.x)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
