@@ -7,36 +7,47 @@ import (
 )
 
 func TestPascalsTriangleSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   PascalsTriangleSolution
 	}{
 		{"solution", Solution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
-				name  string
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				level int
-				r     [][]int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want [][]int
 			}{
 				{
 					"",
-					1,
+					args{1},
 					[][]int{{1}},
 				},
 				{
 					"",
-					5,
+					args{5},
 					[][]int{{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}},
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					r := solution.fn(testCase.level)
-					assert.Equal(t, testCase.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.level)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
