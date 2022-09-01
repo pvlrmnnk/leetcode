@@ -3,39 +3,59 @@ package p0021
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMergeTwoSortedListsSolution(t *testing.T) {
-	ss := []MergeTwoSortedListsSolution{
-		Solution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   MergeTwoSortedListsSolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				list1, list2 *ListNode
+			}
 			tcs := []struct {
-				list1, list2, r *ListNode
+				name string
+				args args
+				want *ListNode
 			}{
 				{
-					&ListNode{1, &ListNode{2, &ListNode{4, nil}}},
-					&ListNode{1, &ListNode{3, &ListNode{4, nil}}},
+					"",
+					args{
+						&ListNode{1, &ListNode{2, &ListNode{4, nil}}},
+						&ListNode{1, &ListNode{3, &ListNode{4, nil}}},
+					},
 					&ListNode{1, &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{4, nil}}}}}},
 				},
 				{
-					nil,
-					&ListNode{0, nil},
+					"",
+					args{nil, &ListNode{0, nil}},
 					&ListNode{0, nil},
 				},
 				{
-					nil, nil, nil,
+					"",
+					args{nil, nil},
+					nil,
 				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.list1, tc.list2)
-					assert.EqualValues(t, asSlice(t, tc.r), asSlice(t, r))
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.list1, tc.args.list2)
+					assert.EqualValues(t, asSlice(t, tc.want), asSlice(t, got))
 				})
 			}
 		})
