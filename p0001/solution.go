@@ -21,7 +21,6 @@ func MapSolution(nums []int, target int) []int {
 		if idx2, ok := complements[target-num]; ok {
 			return []int{idx1, idx2}
 		}
-
 		complements[num] = idx1
 	}
 

@@ -2,7 +2,6 @@ run:
   skip-dirs:
     - tpl
     - common
-    - p0013
     - p0021
     - p0070
     - p0102
@@ -53,6 +52,14 @@ linters:
     # useless
     - gomnd # magic numbers are ok
     - testpackage # no need for separate test package
+    - wsl # whitespaces are to opinonated
+
+linters-settings:
+  varnamelen:
+    ignore-names:
+      # common names for iterators
+      - i
+      - j
 
 issues:
   exclude-rules:

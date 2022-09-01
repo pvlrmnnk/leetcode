@@ -1,36 +1,59 @@
 package p0013
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRomanToIntSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   RomanToIntSolution
 	}{
-		{"Solution", Solution()},
-		{"ReversedOrderSolution", ReversedOrderSolution()},
+		{"solution", Solution},
+		{"reversed order solution", ReversedOrderSolution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			tcs := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				s string
-				r int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want int
 			}{
-				{"III", 3},
-				{"LVIII", 58},
-				{"MCMXCIV", 1994},
+				{
+					"",
+					args{"III"},
+					3,
+				},
+				{
+					"",
+					args{"LVIII"},
+					58,
+				},
+				{
+					"",
+					args{"MCMXCIV"},
+					1994,
+				},
 			}
 
 			for _, tc := range tcs {
-				t.Run(fmt.Sprintf("%s", tc.s), func(t *testing.T) {
-					r := solution.fn(tc.s)
-					assert.Equal(t, tc.r, r)
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.s)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
