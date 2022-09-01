@@ -7,36 +7,31 @@ type ListNode struct {
 
 type ReverseLinkedListSolution func(head *ListNode) *ListNode
 
-func IterativeSolution() ReverseLinkedListSolution {
-	return func(head *ListNode) *ListNode {
-		var r, next *ListNode
+func IterativeSolution(head *ListNode) *ListNode {
+	var root, next *ListNode
 
-		for head != nil {
-			next = head.Next
-			head.Next = r
-			r = head
-			head = next
-		}
-
-		return r
+	for head != nil {
+		next = head.Next
+		head.Next = root
+		root = head
+		head = next
 	}
+
+	return root
 }
 
-func RecursiveSolution() ReverseLinkedListSolution {
-	var r func(h *ListNode, nh *ListNode) *ListNode
+func RecursiveSolution(head *ListNode) *ListNode {
+	var reverse func(head, next *ListNode) *ListNode
 
-	r = func(h *ListNode, nh *ListNode) *ListNode {
-		if h == nil {
-			return nh
+	reverse = func(head *ListNode, next *ListNode) *ListNode {
+		if head == nil {
+			return next
 		}
 
-		next := h.Next
-		h.Next = nh
+		next, head.Next = head.Next, next
 
-		return r(next, h)
+		return reverse(next, head)
 	}
 
-	return func(head *ListNode) *ListNode {
-		return r(head, nil)
-	}
+	return reverse(head, nil)
 }

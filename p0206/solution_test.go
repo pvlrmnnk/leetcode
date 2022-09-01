@@ -3,38 +3,57 @@ package p0206
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestReverseLinkedListSolution(t *testing.T) {
-	ss := []ReverseLinkedListSolution{
-		IterativeSolution(),
-		RecursiveSolution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   ReverseLinkedListSolution
+	}{
+		{"iterative solution", IterativeSolution},
+		{"recursive solution", RecursiveSolution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				head *ListNode
+			}
 			tcs := []struct {
-				head, r *ListNode
+				name string
+				args args
+				want *ListNode
 			}{
 				{
-					&ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, nil}}}}},
+					"",
+					args{&ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, nil}}}}}},
 					&ListNode{5, &ListNode{4, &ListNode{3, &ListNode{2, &ListNode{1, nil}}}}},
 				},
 				{
-					&ListNode{1, &ListNode{2, nil}},
+					"",
+					args{&ListNode{1, &ListNode{2, nil}}},
 					&ListNode{2, &ListNode{1, nil}},
 				},
 				{
-					nil, nil,
+					"",
+					args{nil},
+					nil,
 				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.head)
-					assert.EqualValues(t, asSlice(t, tc.r), asSlice(t, r))
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.head)
+					assert.Equal(t, asSlice(t, tc.want), asSlice(t, got))
 				})
 			}
 		})
