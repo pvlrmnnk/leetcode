@@ -3,30 +3,52 @@ package p0409
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLongestPalindromeSolution(t *testing.T) {
-	ss := []LongestPalindromeSolution{
-		Solution(),
-		GreedySolution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   LongestPalindromeSolution
+	}{
+		{"solution", Solution},
+		{"solution", GreedySolution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
-			tcs := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				s string
-				r int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want int
 			}{
-				{"abccccdd", 7},
-				{"a", 1},
+				{
+					"",
+					args{"abccccdd"},
+					7,
+				},
+				{
+					"",
+					args{"a"},
+					1,
+				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.s)
-					assert.Equal(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.s)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
