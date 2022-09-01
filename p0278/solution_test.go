@@ -7,30 +7,42 @@ import (
 )
 
 func TestBinarySearchSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   FirstBadVersionSolution
 	}{
 		{"solution", Solution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
-				name       string
-				currentVer int
-				badVer     int
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				version int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want int
 			}{
 				{
 					"bad version is 4",
-					100, 4,
+					args{100},
+					4,
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					badVer := solution.fn(testCase.currentVer)
-					assert.Equal(t, testCase.badVer, badVer)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.version)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})

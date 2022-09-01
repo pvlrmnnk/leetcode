@@ -2,8 +2,8 @@ package p0278
 
 type FirstBadVersionSolution func(n int) int
 
-func Solution(n int) int {
-	low, high := 1, n
+func Solution(v int) int {
+	low, high := 1, v
 
 	for low <= high {
 		mid := low + (high-low)/2
