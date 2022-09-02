@@ -2,7 +2,6 @@ run:
   skip-dirs:
     - tpl
     - common
-    - p1480
     - p1646
 
 linters:

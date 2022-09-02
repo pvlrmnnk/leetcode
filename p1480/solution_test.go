@@ -3,30 +3,56 @@ package p1480
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRunningSumOf1dArraySolution(t *testing.T) {
-	solutions := []RunningSumOf1dArraySolution{
-		Solution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   RunningSumOf1dArraySolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, solution := range solutions {
-		t.Run(test.Solution(i), func(t *testing.T) {
-			tcs := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
 				nums []int
-				r    []int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want []int
 			}{
-				{[]int{1, 2, 3, 4}, []int{1, 3, 6, 10}},
-				{[]int{1, 1, 1, 1, 1}, []int{1, 2, 3, 4, 5}},
-				{[]int{3, 1, 2, 10, 1}, []int{3, 4, 6, 16, 17}},
+				{
+					"",
+					args{[]int{1, 2, 3, 4}},
+					[]int{1, 3, 6, 10},
+				},
+				{
+					"",
+					args{[]int{1, 1, 1, 1, 1}},
+					[]int{1, 2, 3, 4, 5},
+				},
+				{
+					"",
+					args{[]int{3, 1, 2, 10, 1}},
+					[]int{3, 4, 6, 16, 17},
+				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.TestCase(i), func(t *testing.T) {
-					r := solution(tc.nums)
-					assert.Equal(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.nums)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
