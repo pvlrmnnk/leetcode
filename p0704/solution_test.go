@@ -7,36 +7,48 @@ import (
 )
 
 func TestBinarySearchSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   BinarySearchSolution
 	}{
 		{"solution", Solution},
-		{"generics solution", GenericsSolution[int]},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
-				name      string
-				nums      []int
-				target    int
-				targetIdx int
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				nums   []int
+				target int
+			}
+			tcs := []struct {
+				name string
+				args args
+				want int
 			}{
 				{
 					"target is in nums",
-					[]int{-1, 0, 3, 5, 9, 12}, 9, 4,
+					args{[]int{-1, 0, 3, 5, 9, 12}, 9},
+					4,
 				},
 				{
 					"target is not in nums",
-					[]int{-1, 0, 3, 5, 9, 12}, 2, -1,
+					args{[]int{-1, 0, 3, 5, 9, 12}, 2},
+					-1,
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					targetIdx := solution.fn(testCase.nums, testCase.target)
-					assert.Equal(t, testCase.targetIdx, targetIdx)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.nums, tc.args.target)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
