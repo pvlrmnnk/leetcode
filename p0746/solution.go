@@ -26,9 +26,9 @@ func OptimizedSolution(cost []int) int {
 	min := func(a, b int) int {
 		if a < b {
 			return a
-		} else {
-			return b
 		}
+
+		return b
 	}
 
 	first, second := cost[0], cost[1]
