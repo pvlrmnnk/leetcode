@@ -2,6 +2,7 @@ package p1646
 
 type MaximumInGeneratedArraySolution func(n int) int
 
+//nolint:varnamelen
 func Solution(n int) int {
 	if n == 0 || n == 1 {
 		return n

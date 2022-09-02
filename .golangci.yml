@@ -2,7 +2,6 @@ run:
   skip-dirs:
     - tpl
     - common
-    - p1646
 
 linters:
   enable-all: true
