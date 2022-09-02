@@ -2,6 +2,7 @@ package p1137
 
 type NthTribonacciNumberSolution func(n int) int
 
+//nolint:varnamelen
 func Solution(n int) int {
 	if n == 0 {
 		return 0
@@ -19,6 +20,7 @@ func Solution(n int) int {
 	return arr[n]
 }
 
+//nolint:varnamelen
 func OptimizedSolution(n int) int {
 	if n < 2 {
 		return n
