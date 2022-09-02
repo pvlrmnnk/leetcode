@@ -7,16 +7,14 @@ type ListNode struct {
 
 type MiddleOfTheLinkedListSolution func(head *ListNode) *ListNode
 
-func Solution() MiddleOfTheLinkedListSolution {
-	return func(head *ListNode) *ListNode {
-		fast := head
-		slow := head
+func Solution(head *ListNode) *ListNode {
+	fast := head
+	slow := head
 
-		for fast != nil && fast.Next != nil {
-			fast = fast.Next.Next
-			slow = slow.Next
-		}
-
-		return slow
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
 	}
+
+	return slow
 }

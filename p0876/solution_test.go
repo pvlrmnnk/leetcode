@@ -3,37 +3,80 @@ package p0876
 import (
 	"testing"
 
-	"github.com/pvlrmnnk/leetcode-go/common/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMiddleOfTheLinkedListSolution(t *testing.T) {
-	ss := []MiddleOfTheLinkedListSolution{
-		Solution(),
+	t.Parallel()
+
+	ss := []struct {
+		name string
+		fn   MiddleOfTheLinkedListSolution
+	}{
+		{"solution", Solution},
 	}
 
-	for i, s := range ss {
-		t.Run(test.N("s", i), func(t *testing.T) {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				head *ListNode
+			}
 			tcs := []struct {
-				head, r *ListNode
+				name string
+				args args
+				want *ListNode
 			}{
-				func() struct{ head, r *ListNode } {
+				func() struct {
+					name string
+					args args
+					want *ListNode
+				} {
 					head := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, nil}}}}}
-					return struct{ head, r *ListNode }{head, head.Next.Next}
+
+					return struct {
+						name string
+						args args
+						want *ListNode
+					}{
+						"",
+						args{head},
+						head.Next.Next,
+					}
 				}(),
-				func() struct{ head, r *ListNode } {
+				func() struct {
+					name string
+					args args
+					want *ListNode
+				} {
 					head := &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{5, &ListNode{6, nil}}}}}}
-					return struct{ head, r *ListNode }{head, head.Next.Next.Next}
+
+					return struct {
+						name string
+						args args
+						want *ListNode
+					}{
+						"",
+						args{head},
+						head.Next.Next.Next,
+					}
 				}(),
 				{
-					nil, nil,
+					"",
+					args{nil},
+					nil,
 				},
 			}
 
-			for i, tc := range tcs {
-				t.Run(test.N("tc", i), func(t *testing.T) {
-					r := s(tc.head)
-					assert.EqualValues(t, tc.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.head)
+					assert.EqualValues(t, tc.want, got)
 				})
 			}
 		})
