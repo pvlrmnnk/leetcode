@@ -10,20 +10,20 @@ type Node struct {
 type TreePreorderTraversalSolution func(root *Node) []int
 
 func RecursiveSolution(root *Node) []int {
-	var walk func(n *Node, v []int) []int
+	var walk func(node *Node, v []int) []int
 
-	walk = func(n *Node, v []int) []int {
-		if n == nil {
-			return v
+	walk = func(node *Node, values []int) []int {
+		if node == nil {
+			return values
 		}
 
-		v = append(v, n.Val)
+		values = append(values, node.Val)
 
-		for _, c := range n.Children {
-			v = walk(c, v)
+		for _, c := range node.Children {
+			values = walk(c, values)
 		}
 
-		return v
+		return values
 	}
 
 	return walk(root, nil)
