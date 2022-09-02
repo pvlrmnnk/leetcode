@@ -7,34 +7,47 @@ import (
 )
 
 func TestDivisorGameSolution(t *testing.T) {
-	solutions := []struct {
+	t.Parallel()
+
+	ss := []struct {
 		name string
 		fn   DivisorGameSolution
 	}{
 		{"solution", Solution},
 	}
 
-	for _, solution := range solutions {
-		t.Run(solution.name, func(t *testing.T) {
-			testCases := []struct {
+	for _, s := range ss {
+		s := s
+		t.Run(s.name, func(t *testing.T) {
+			t.Parallel()
+
+			type args struct {
+				n int
+			}
+			tcs := []struct {
 				name string
-				n    int
-				r    bool
+				args args
+				want bool
 			}{
 				{
 					"",
-					2, true,
+					args{2},
+					true,
 				},
 				{
 					"",
-					3, false,
+					args{3},
+					false,
 				},
 			}
 
-			for _, testCase := range testCases {
-				t.Run(testCase.name, func(t *testing.T) {
-					r := solution.fn(testCase.n)
-					assert.Equal(t, testCase.r, r)
+			for _, tc := range tcs {
+				tc := tc
+				t.Run(tc.name, func(t *testing.T) {
+					t.Parallel()
+
+					got := s.fn(tc.args.n)
+					assert.Equal(t, tc.want, got)
 				})
 			}
 		})
