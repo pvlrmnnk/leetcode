@@ -13,11 +13,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
         with:
-          go-version-file: go.mod
+          go-version-file: go/go.mod
       - uses: golangci/golangci-lint-action@v3
         with:
           version: latest
-          args: ./solution/...
+          working-directory: ./solution
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -25,5 +25,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
         with:
-          go-version-file: go.mod
-      - run: "go test -v -race ./solution/..."
+          go-version-file: go/go.mod
+      - working-directory: ./go
+        run: go test -v -race ./...
