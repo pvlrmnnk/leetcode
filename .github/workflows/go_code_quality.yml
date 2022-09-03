@@ -1,9 +1,11 @@
-name: Code Quality
+name: Go Code Quality
 
 on:
   push:
     branches:
       - main
+    paths:
+      - go
 
 jobs:
   lint:
