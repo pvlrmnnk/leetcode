@@ -23,8 +23,9 @@ linters:
     # useless
     - gomnd # magic numbers are ok
     - testpackage # no need for separate test package
-    - wsl # whitespaces are to opinonated
+    - wsl # whitespaces are too opinonated
     - forcetypeassert # i know what i'm doing
+    - funlen # i'm ok, because it's easier to wrap all in one function
 
 linters-settings:
   varnamelen:
@@ -38,4 +39,3 @@ issues:
     - path: _test\.go
       linters:
         - varnamelen
-        - funlen
