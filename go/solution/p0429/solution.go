@@ -9,34 +9,25 @@ type Node struct {
 
 type TreeLevelOrderTraversalSolution func(root *Node) [][]int
 
-func Solution(root *Node) [][]int {
+func Solution(root *Node) (levels [][]int) {
 	if root == nil {
-		return nil
-	}
-
-	type wrapper struct {
-		node *Node
-		lvl  int
+		return
 	}
 
 	queue := list.New()
-	queue.PushBack(&wrapper{root, 0})
-	values := make([][]int, 0)
+	queue.PushBack(root)
 
 	for queue.Len() != 0 {
-		w, _ := queue.Remove(queue.Front()).(*wrapper)
-		parent := w.node
-		lvl := w.lvl
-
-		if lvl+1 > len(values) {
-			values = append(values, make([]int, 0))
+		lvl := make([]int, queue.Len())
+		for i := 0; i < len(lvl); i++ {
+			node, _ := queue.Remove(queue.Front()).(*Node)
+			lvl[i] = node.Val
+			for _, child := range node.Children {
+				queue.PushBack(child)
+			}
 		}
-		values[lvl] = append(values[lvl], parent.Val)
-
-		for _, child := range parent.Children {
-			queue.PushBack(&wrapper{child, lvl + 1})
-		}
+		levels = append(levels, lvl)
 	}
 
-	return values
+	return
 }
