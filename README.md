@@ -1,3 +1,5 @@
+# LeetCode
+
 - [1. Two Sum](https://leetcode.com/problems/two-sum/)
     - [Brute force solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0001/solution.go#L5)
     - [Map-based solution](https://github.com/pvlrmnnk/leetcode-go/blob/main/p0001/solution.go#L19)
